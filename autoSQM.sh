@@ -10,12 +10,12 @@ cat "$(ls -rt /tmp/speedtestResult/*.log | tail -n1)" | grep -i download | tr -d
 cat "$(ls -rt /tmp/speedtestResult/*.log | tail -n1)" | grep -i upload | tr -d "Upload: " | tr -d Mbps | sort -n > /tmp/upload.txt
 
 #get average speed for download & upload
-download=`cat /tmp/download.txt  | awk -f median.awk | cut -f1 -d"."`
-upload=`cat /tmp/upload.txt  | awk -f median.awk | cut -f1 -d"."`
+download=`cat /tmp/download.txt  | awk -f median.awk`
+upload=`cat /tmp/upload.txt  | awk -f median.awk`
 
 #convert to Kbps & adjust to 80% speed
-downloadKbps=$((download*1000*80/100))
-uploadKbps=$((upload*1000*80/100))
+downloadKbps=$(awk "BEGIN {download = $download; print download*1000*80/100}")
+uploadKbps=$(awk "BEGIN {upload = $upload; print upload*1000*80/100}")
 echo $downloadKbps
 echo $uploadKbps
 
