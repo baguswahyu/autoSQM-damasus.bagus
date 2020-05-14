@@ -20,8 +20,8 @@
  echo $uploadKbps
  
  #set value to SQM use uci
- uci set sqm.eth1.upload=$uploadKbps
- uci set sqm.eth1.download=$downloadKbps
+ uci set sqm.eth1.upload=${uploadKbps%%.*}
+ uci set sqm.eth1.download=${downloadKbps%%.*}
  uci commit
  /etc/init.d/sqm reload
  
