@@ -6,8 +6,8 @@
  /etc/init.d/sqm start
  
  #Get list of speedtest
- cat "$(ls -rt /tmp/speedtestResult/*.log | tail -n1)" | grep -i download | tr -d "Download: " | tr -d Mbps | sort -n > /tmp/download.txt
- cat "$(ls -rt /tmp/speedtestResult/*.log | tail -n1)" | grep -i upload | tr -d "Upload: " | tr -d Mbps | sort -n > /tmp/upload.txt
+ cat /tmp/speedtestResult/speedtestLog-"$(date +"%Y-%m-%d").log" | grep -i download | tr -d "Download: " | tr -d Mbps | sort -n > /tmp/download.txt
+ cat /tmp/speedtestResult/speedtestLog-"$(date +"%Y-%m-%d").log" | grep -i upload | tr -d "Upload: " | tr -d Mbps | sort -n > /tmp/upload.txt
  
  #get average speed for download & upload
  download=`cat /tmp/download.txt  | awk -f median.awk`
