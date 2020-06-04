@@ -20,10 +20,16 @@
  echo $uploadKbps
  
  #set value to SQM use uci
+ #change value after -gt to only apply SQM if the result greate than X (in kbps)
+ if [ "$downloadKbps" -gt 10000 ] && [ "$uploadKbps" -gt 10000 ]; then
+ echo "setting up SQM with new value"
  uci set sqm.eth1.upload=${uploadKbps%%.*}
  uci set sqm.eth1.download=${downloadKbps%%.*}
  uci commit
  /etc/init.d/sqm reload
+ echo "auto sqm DONE!"
+ logger -t autoSQM -p info "Set download = $downloadKbps, upload = $uploadKbps"
+ fi
  
  echo "auto sqm DONE!"
  logger -t autoSQM -p info "Set download = $downloadKbps, upload = $uploadKbps"
