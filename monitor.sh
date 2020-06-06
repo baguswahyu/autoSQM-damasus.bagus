@@ -1,5 +1,5 @@
 #!/bin/sh /etc/rc.common
-rm -rf /root/test-result.log
+rm -rf /root/download.txt
 while true; do
    RX_1=`ifconfig eth1 | grep "RX bytes" | cut -f 2 -d : | cut -f 1 -d "("`
    TX_1=`ifconfig eth1 | grep "TX bytes" | cut -f 3 -d : | cut -f 1 -d "("`
